@@ -48,7 +48,9 @@
       async generate() {
         const result = menu.generate({ isOdd: this.isOdd, includeFri: this.includeFriComputed });
         Vue.set(this, 'result', result)
-        setTimeout(() => {this.copy()}, 0)
+        setTimeout(() => {
+          window.Clipboard.copy(this.menuText);
+        }, 0)
       },
       copy() {
         const copyInput = this.$refs.copyInput;
@@ -65,7 +67,7 @@
           return '';
         }
         return this.result.reduce((ret, { date, one, two }) => {
-          return `${ret}${date}: ${one}, ${two}; `
+          return `${ret}${date}: ${one}, ${two};\n `
         }, '')
       }
     },
